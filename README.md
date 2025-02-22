@@ -1,36 +1,73 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Danis Alfonso Ramírez - Personal Website
+
+This is my personal website built with Next.js. The site features a modern, responsive design with dark mode support and a built-in blog system.
+
+## Features
+
+- 🎨 Modern UI with Tailwind CSS
+- 🌓 Dark/Light mode support
+- 📱 Fully responsive design
+- ✨ Smooth animations with Framer Motion
+- 📝 MDX-powered blog
+- 🎯 SEO optimized
+- 🚀 Built with Next.js 14
+- 💻 TypeScript for type safety
+
+## Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Content**: [MDX](https://mdxjs.com/)
+- **Deployment**: [Vercel](https://vercel.com)
 
 ## Getting Started
 
-First, run the development server:
+First, clone the repository:
+
+```bash
+git clone https://github.com/DanisAlfonso/personal-website.git
+cd personal-website
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+├── src/
+│   ├── app/              # Next.js app directory
+│   ├── components/       # React components
+│   ├── lib/             # Utility functions
+│   └── styles/          # Global styles
+├── content/
+│   └── posts/           # MDX blog posts
+├── public/              # Static assets
+└── package.json         # Project dependencies
+```
 
-## Learn More
+## About Me
 
-To learn more about Next.js, take a look at the following resources:
+I was born in Honduras in 1989. From 2014 to 2019, I taught physics at various institutions in my home country, primarily at the Universidad Nacional Autónoma de Honduras (UNAH). My journey into programming began with C++ during my physics studies, followed by Python for teaching and personal projects. Currently based in Spain, I'm focused on building modern web applications and exploring various programming languages and technologies.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- 📧 Email: danis.ramirez.hn@gmail.com
+- 🔗 GitHub: [@DanisAlfonso](https://github.com/DanisAlfonso)
+- 📍 Location: Spain
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is open source and available under the [MIT License](LICENSE).
