@@ -59,7 +59,7 @@ export default function About() {
               <div className="space-y-2">
                 <h4 className="font-medium">Skills</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["C++", "Python", "JavaScript", "TypeScript", "React", "Next.js", "Rust", "Swift", "Dart"].map(
+                  {["C++", "Python", "JavaScript", "TypeScript", "React", "Next.js", "React Native", "Expo", "TailwindCSS"].map(
                     (skill) => (
                       <span
                         key={skill}
@@ -86,41 +86,24 @@ export default function About() {
               </section>
 
               <section className="space-y-4">
-                <h2 className="h2">Projects</h2>
+                <h2 className="h2">Experience</h2>
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">MuscleMetrics</h3>
-                    <p className="text-sm text-muted-foreground">Personal Project • Dart</p>
+                    <h3 className="text-lg font-semibold">Software Developer</h3>
+                    <p className="text-sm text-muted-foreground">Freelance • 2020 - Present</p>
                     <p className="text-muted-foreground">
-                      A fitness tracking application built with modern technologies.
+                      Developing modern web and mobile applications using React, Next.js, and React Native.
+                      Focused on creating responsive, user-friendly interfaces and implementing robust backend solutions.
                     </p>
                   </div>
                   <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">NeoNotes</h3>
-                    <p className="text-sm text-muted-foreground">Personal Project • Swift</p>
+                    <h3 className="text-lg font-semibold">Physics Professor</h3>
+                    <p className="text-sm text-muted-foreground">Universidad Nacional Autónoma de Honduras • 2014 - 2019</p>
                     <p className="text-muted-foreground">
-                      A note-taking application with advanced features.
+                      Taught physics at the university level, combining theoretical concepts with practical applications
+                      and occasionally incorporating programming for problem-solving and demonstrations.
                     </p>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-lg font-semibold">NumLib</h3>
-                    <p className="text-sm text-muted-foreground">Personal Project • C++</p>
-                    <p className="text-muted-foreground">
-                      A numerical computation library implementing various mathematical algorithms.
-                    </p>
-                  </div>
-                </div>
-              </section>
-
-              <section className="space-y-4">
-                <h2 className="h2">Background</h2>
-                <div className="space-y-2">
-                  <h3 className="text-lg font-semibold">Physics Professor</h3>
-                  <p className="text-sm text-muted-foreground">Universidad Nacional Autónoma de Honduras • 2014 - 2019</p>
-                  <p className="text-muted-foreground">
-                    Taught physics at the university level, combining theoretical concepts with practical applications
-                    and occasionally incorporating programming for problem-solving and demonstrations.
-                  </p>
                 </div>
               </section>
             </motion.div>

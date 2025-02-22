@@ -54,8 +54,22 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground min-h-screen;
     font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  html.dark body {
+    background: radial-gradient(
+      circle at 15% 15%,
+      color-mix(in srgb, rgb(124, 58, 237) 7%, hsl(var(--background))) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      color-mix(in srgb, rgb(37, 99, 235) 7%, hsl(var(--background))) 0%,
+      transparent 45%
+    ),
+    hsl(var(--background));
   }
 }
 

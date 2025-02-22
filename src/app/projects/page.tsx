@@ -4,30 +4,48 @@ import { Header } from "../components/header";
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
 
-const projects = [
+type Project = {
+  title: string;
+  description: string;
+  tags: string[];
+  links: {
+    github: string;
+    live: string;
+  };
+} & (
+  | {
+      image: string;
+      images?: never;
+    }
+  | {
+      images: string[];
+      image?: never;
+    }
+);
+
+const projects: Project[] = [
   {
-    title: "Project Name 1",
+    title: "Selvas Coffee E-Commerce",
     description:
-      "A brief description of your project. What problems does it solve? What technologies did you use?",
-    image: "/project1.jpg",
-    tags: ["Next.js", "React", "TypeScript", "TailwindCSS"],
+      "Modern coffee e-commerce platform targeting European markets. Features multi-language support, European VAT-compliant pricing, secure authentication, real-time inventory management, and GDPR-compliant data handling.",
+    image: "/coffee.png",
+    tags: ["Next.js", "Supabase", "TypeScript", "TailwindCSS", "Stripe", "PostgreSQL"],
     links: {
-      github: "https://github.com/yourusername/project1",
-      live: "https://project1.com",
+      github: "https://github.com/DanisAlfonso/supabase-coffee-traders",
+      live: "#",
     },
   },
   {
-    title: "Project Name 2",
+    title: "LinguaFlow",
     description:
-      "Another amazing project you've built. Highlight the key features and your role in development.",
-    image: "/project2.jpg",
-    tags: ["React", "Node.js", "MongoDB", "Express"],
+      "A mobile application built with Expo and TypeScript, designed to provide an intuitive language learning experience. Features file-based routing and a modern development workflow.",
+    images: ["/3.jpeg", "/4.jpeg", "/6.jpeg"],
+    tags: ["React Native", "Expo", "TypeScript", "Mobile Development"],
     links: {
-      github: "https://github.com/yourusername/project2",
-      live: "https://project2.com",
+      github: "https://github.com/DanisAlfonso/linguaflow",
+      live: "#",
     },
   },
-  // Add more projects as needed
 ];
 
 const fadeInUp = {
@@ -58,8 +76,7 @@ export default function Projects() {
           >
             <h1 className="h1 mb-4">My Projects</h1>
             <p className="text-lg text-muted-foreground">
-              A collection of projects I&apos;ve worked on. Each project represents a unique challenge
-              and solution.
+              A showcase of my recent development work, featuring web and mobile applications.
             </p>
           </motion.div>
 
@@ -67,7 +84,7 @@ export default function Projects() {
             variants={staggerContainer}
             initial="initial"
             animate="animate"
-            className="grid gap-6 md:grid-cols-2 lg:grid-cols-3"
+            className="grid gap-6 md:grid-cols-2"
           >
             {projects.map((project) => (
               <motion.div
@@ -75,13 +92,34 @@ export default function Projects() {
                 variants={fadeInUp}
                 className="group relative overflow-hidden rounded-lg border bg-card transition-all hover:shadow-lg"
               >
-                <div className="aspect-video w-full overflow-hidden">
+                <div className="aspect-video w-full overflow-hidden bg-black/20">
                   <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-background/20" />
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
+                  {'images' in project && project.images ? (
+                    <div className="relative flex h-full items-center justify-center gap-2 px-4">
+                      {project.images.map((img, index) => (
+                        <div
+                          key={img}
+                          className="relative h-[90%] overflow-hidden rounded-lg shadow-lg"
+                          style={{
+                            width: 'auto',
+                            transform: `rotate(${index === 1 ? '0' : index === 0 ? '-5' : '5'}deg)`,
+                          }}
+                        >
+                          <img
+                            src={img}
+                            alt={`${project.title} screenshot ${index + 1}`}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                    />
+                  )}
                 </div>
                 <div className="p-6">
                   <h3 className="h3 mb-2">{project.title}</h3>
@@ -106,15 +144,17 @@ export default function Projects() {
                       <Github className="h-4 w-4" />
                       Source
                     </a>
-                    <a
-                      href={project.links.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      Live Demo
-                    </a>
+                    {project.links.live !== "#" && (
+                      <a
+                        href={project.links.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        Live Demo
+                      </a>
+                    )}
                   </div>
                 </div>
               </motion.div>

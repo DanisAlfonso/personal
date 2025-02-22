@@ -16,12 +16,11 @@ export default function Home() {
             className="flex flex-col items-center gap-6 text-center"
           >
             <div className="relative">
-              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-primary to-secondary opacity-75 blur-md" />
-              <div className="relative rounded-full border-2 border-border/50 bg-background p-1">
+              <div className="relative rounded-full border border-border/20 bg-background p-1">
                 <img
                   src="/placeholder-avatar.jpg"
                   alt="Danis Ramírez"
-                  className="h-48 w-48 rounded-full object-cover md:h-56 md:w-56"
+                  className="h-52 w-52 rounded-full object-cover md:h-64 md:w-64"
                 />
               </div>
             </div>
