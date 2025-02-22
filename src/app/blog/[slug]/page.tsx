@@ -7,14 +7,14 @@ import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
+interface PageProps {
+  params: Promise<{ slug: string }>;
 }
 
-export default async function BlogPost({ params }: BlogPostPageProps) {
-  const post = await getPost(params.slug);
+export default async function BlogPost({ params }: PageProps) {
+  // Await the params
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();

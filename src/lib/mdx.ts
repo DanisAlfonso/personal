@@ -10,6 +10,8 @@ export type Post = {
   date: string;
   readingTime: string;
   tags: string[];
+  language: "en" | "de";
+  category: "tech" | "philosophy" | "other";
   slug: string;
   content: string;
 };
@@ -53,4 +55,21 @@ export async function getAllPosts(): Promise<Post[]> {
     console.error("Error getting all posts:", error);
     return [];
   }
+}
+
+export function getLanguageName(language: Post["language"]): string {
+  const languages = {
+    en: "English",
+    de: "Deutsch",
+  };
+  return languages[language];
+}
+
+export function getCategoryName(category: Post["category"]): string {
+  const categories = {
+    tech: "Technology",
+    philosophy: "Philosophy",
+    other: "Other",
+  };
+  return categories[category];
 } 
