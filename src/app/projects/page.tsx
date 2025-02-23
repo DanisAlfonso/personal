@@ -76,7 +76,7 @@ export default function Projects() {
           >
             <h1 className="h1 mb-4">My Projects</h1>
             <p className="text-lg text-muted-foreground">
-              A showcase of my recent development work, featuring web and mobile applications.
+              Here are some of my recent projects. For more details on past work, feel free to check out my GitHub profile.
             </p>
           </motion.div>
 
