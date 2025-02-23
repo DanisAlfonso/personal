@@ -1,0 +1,324 @@
+---
+title: "LU Decomposition: A Step-by-Step Guide"
+description: "A comprehensive explanation of LU decomposition in linear algebra, including detailed mathematical derivations and a practical example."
+date: "2022-05-05"
+readingTime: "15 min read"
+tags: ["Mathematics", "Linear Algebra", "Matrix Decomposition"]
+language: "en"
+category: "mathematics"
+---
+
+The LU decomposition, also known as the lower-upper decomposition, factorizes a matrix into the product of a lower triangular matrix (with elements only on or below the diagonal) and an upper triangular matrix (with elements only on or above the diagonal). This decomposition allows us to express a matrix $A$ as the product of two matrices, $L$ and $U$, such that $L \cdot U = A$. The matrix L is *lower triangular*, and the matrix U is *upper triangular*.
+
+$$
+\begin{pmatrix}
+l_{00} & 0 & 0 \\
+l_{10} & l_{11} & 0 \\
+l_{20} & l_{21} & l_{22}
+\end{pmatrix}
+\begin{pmatrix}
+u_{00} & u_{01} & u_{02} \\
+0 & u_{11} & u_{12} \\
+0 & 0 & u_{22}
+\end{pmatrix} =
+\begin{pmatrix}
+a_{00} & a_{01} & a_{02} \\
+a_{10} & a_{11} & a_{12} \\
+a_{20} & a_{21} & a_{22}
+\end{pmatrix}
+$$
+
+Let's work out a few steps for our $4\times 4$ example:
+
+For $i = 0$ and $j = 0$ you have $l_{00} = 1$, this is of course, the same for $i, j = 1, 2, 3$.
+
+$$
+u_{00} = a_{00}
+$$
+
+$$
+u_{01} = a_{01}
+$$
+
+$$
+u_{02} = a_{02}
+$$
+
+$$
+u_{03} = a_{03}
+$$
+
+Something similar apply to get the first column of $L$, the first element is $l_{00} = 1$ and then for $j = 1, 2, 3$ you will have:
+
+$$
+l_{10} = \frac{a_{10}}{a_{00}}
+$$
+
+$$
+l_{20} = \frac{a_{20}}{a_{00}}
+$$
+
+$$
+l_{30} = \frac{a_{30}}{a_{00}}
+$$
+
+The next elements you can calculate are $u_{11}$, $l_{21}$ and $l_{31}$ and they are:
+
+$$
+u_{11} = a_{11} - l_{10}u_{01}
+$$
+
+$$
+l_{21} = \frac{a_{21} - l_{20} u_{01}}{u_{11}}
+$$
+
+$$
+l_{31} = \frac{a_{31} - l_{30} u_{01}}{u_{11}}
+$$
+
+Notice that by the time you need the values in the right side of the equations you already know them, so everything is in place so to speak, and you can go in a similar fashion for the rest of the unknowns variables.
+
+If you follow the previous steps you know that is possible to write any matrix as product of two other matrices, but why is that useful? The point is actually to solve equations like the next one:
+
+$$
+A \cdot x = b
+$$
+
+In this equation, $A$ is $m\times n$ matrix, $x$ is an $n\times 1$ vector and $b$ a $m\times 1$ vector. I'm going to use the operator ($\cdot$) indistinctly for the product between vectors and matrices or numbers. With the substitution $A = L\cdot U$, I can have the following equations:
+
+$$ 
+A \cdot x = (L \cdot U) \cdot x = L \cdot (U \cdot x) = b
+$$
+
+$$ 
+L \cdot y = b
+$$
+
+$$ 
+U \cdot x = y 
+$$
+
+Now you have two sets of equations instead of one, but the advantage is that the solution of a triangular set of equations is much easier. Here is the general procedure to solve the previous equations and in the next section, I'll show you an example.
+
+- If $i = j$; for $i = 0, 1, 2, \dots n-1$ and $j = 0, 1, ..., n-1$, set $l_{ij} = 1$
+- For $j = 0, 1, 2, \dots n-1$ do these two procedures:
+  - first, for $i = 0, 1, \dots j$ and solve for $u_{ij}$,
+  - second, for $i = j + 1, j + 2, \dots n-1$ solve for $l_{ij}$.
+
+The general solution for $u_{ij}$ is:
+
+$$ 
+u_{ij} = a_{ij} - \sum_{k = 0}^{i-1} l_{ik}\cdot u_{kj} 
+$$
+
+Similarly we can solve for $l_{ij}$:
+
+$$ 
+l_{ij} = \frac{1}{u_{jj}}\left(a_{ij} - \sum\limits_{k=0}^{j-1} l_{ik}\cdot u_{kj}\right) 
+$$
+
+The equation $L \cdot y = b$ can be solved by *forward substitution* as follows:
+
+$$y_{0} = \frac{b_0}{l_{00}}$$
+
+$$
+y_{i} = \frac{1}{l_{ii}}\left(b_{i} - \sum_{j = 0}^{i-1}l_{ij}\cdot y_{j} \right)
+\quad i = 1, 2,\dots, n-1
+$$
+
+while $U \cdot x = y$ can then be solved by backsubstitution:
+
+$$
+x_{n-1} = \frac{y_{n-1}}{u_{n-1, n-1}}
+$$
+
+$$
+x_{i} = \frac{1}{u_{ii}}\left(y_{i} - \sum_{j = i + 1}^{n-1} u_{ij}x_{j} \right)
+\quad i = n - 2, n - 3,\dots, 0
+$$
+
+The previous $x_{i}$ were the solutions that we really wanted, but let's see an example that will illustrate everything better.
+
+## Example
+
+Here is a system of equations, and your goal is to find the values of $x_{0}$, $x_{1}$ and $x_{2}$.
+$$
+\begin{pmatrix}
+ 4 & -2 & 1 \\
+-3 &  -1 & 4 \\
+1 &  -1 & 5
+\end{pmatrix} \begin{pmatrix}
+x_{0} \\
+x_{1} \\
+x_{2}
+\end{pmatrix} = \begin{pmatrix}
+1 \\
+2 \\
+3
+\end{pmatrix}
+$$
+
+First, you can write the matrix, let's call it $A$, as a product of the other two matrices $L$ and $U$.
+
+$$
+\begin{pmatrix}
+l_{00} &  0      & 0 \\
+l_{10} &  l_{11} & 0 \\
+l_{20} &  l_{21} & l_{22}
+\end{pmatrix} \begin{pmatrix}
+u_{00} & u_{01} & u_{02} \\
+0      & u_{11} & u_{12} \\
+0      & 0 & u_{22}
+\end{pmatrix} = \begin{pmatrix}
+4  & -2 & 1 \\
+-3 &  -1 & 4 \\
+1  &  -1 & 5
+\end{pmatrix}
+$$
+
+For the matrix $L$, the elements $l_{ij}$ are equal 1, if $i = j$.
+
+$$
+\begin{pmatrix}
+1 &  0      & 0 \\
+l_{10} &  1 & 0 \\
+l_{20} &  l_{21} & 1
+\end{pmatrix} \begin{pmatrix}
+u_{00} & u_{01} & u_{02} \\
+0      & u_{11} & u_{12} \\
+0      & 0 & u_{22}
+\end{pmatrix} = \begin{pmatrix}
+4  & -2 & 1 \\
+-3 &  -1 & 4 \\
+1  &  -1 & 5
+\end{pmatrix}
+$$
+
+At this point you already know the values $u_{00}$, $u_{01}$ and $u_{02}$, they are:
+
+I'm going to multiply the first row of $L$ with the first column of $U$.
+
+$$1\cdot u_{00} + 0\cdot 0 + 0\cdot 0 = 4$$
+
+$$u_{00} = 4$$
+
+The first row of $L$ with the second column of $U$.
+
+$$1\cdot u_{01} + 0\cdot u_{11} + 0\cdot 0 = -2$$
+$$u_{01} = -2$$
+
+And the first row of $L$ with the third column of $U$.
+
+$$1\cdot u_{02} + 0\cdot u_{12} + 0\cdot u_{22} = 1$$
+
+$$u_{02} = 1$$
+
+Now you can find the values of $l_{10}$ and $l_{20}$. First, to find $l_{10}$ you're going to multiply the second row of $L$ with the first column of $U$,
+
+$$l_{10} \cdot u_{00} + 1\cdot 0 + 0\cdot 0 = -3$$
+
+$$4\cdot l_{10} = -3$$
+
+$$l_{10} = -3/4$$
+
+and to find $l_{20}$, you have to multiply the third row of $L$ and the first column of $U$.
+
+$$l_{20} \cdot u_{00} + l_{21} \cdot 0 + 1\cdot 0 = 1$$
+
+$$4\cdot l_{20} = 1$$
+
+$$l_{20} = 1/4$$
+
+You can go now for $u_{11}$, to do that, multiply the first row of $L$ and the second column of $U$:
+
+$$l_{10}\cdot u_{01} + 1\cdot u_{11} + 0 \cdot 0 = -1$$
+
+$$u_{11} = -1 - l_{10}\cdot u_{01}$$
+
+$$u_{11} = -5/2$$
+
+You can find $l_{21}$ now.
+
+$$l_{20}\cdot u_{01} + l_{21} \cdot u_{11} = -1 $$
+
+$$l_{21} = (-1 - l_{20}\cdot u_{01})/u_{11} $$
+
+$$l_{21} = 1/5 $$
+
+And finally for $u_{12}$ and $u_{22}$.
+
+$$l_{10}\cdot u_{02} + u_{12} = 4 $$
+
+$$u_{12} = 4 - l_{10}\cdot u_{02}$$
+
+$$u_{12} = 19/4 $$
+
+For $u_{22}$:
+
+$$l_{20}\cdot u_{02} + l_{21} \cdot u_{12} + u_{22} = 5$$
+
+$$u_{22} = 5 - l_{20}\cdot u_{02} - l_{21}\cdot u_{12}$$
+
+$$u_{22} = 19/5$$
+
+You can solve now $L\cdot y = b$:
+
+$$
+\begin{pmatrix}
+1    & 0   & 0 \\
+-3/4 & 1   & 0 \\
+1/4  & 1/5 & 1
+\end{pmatrix} \begin{pmatrix}
+y_{0} \\
+y_{1} \\
+y_{2}
+\end{pmatrix} = \begin{pmatrix}
+1 \\
+2 \\
+3
+\end{pmatrix}
+$$
+
+Using forward substitution:
+
+$$
+\begin{pmatrix}
+y_{0} \\
+y_{1} \\
+y_{2}
+\end{pmatrix} =  \begin{pmatrix}
+1 \\
+11/4 \\
+11/5
+\end{pmatrix}
+$$
+
+And now, with this $y_{0}$, $y_{1}$, $y_{2}$ values, you can finally find the values $x_{0}$, $x_{1}$ and $x_{2}$ for $U\cdot x = y$ using backsubstitution.
+
+$$
+\begin{pmatrix}
+4    & -2     & 1 \\
+0    & -5/2   & 19/4 \\
+0    & 0 & 19/5
+\end{pmatrix} \begin{pmatrix}
+x_{0} \\
+x_{1} \\
+x_{2}
+\end{pmatrix} = \begin{pmatrix}
+1 \\
+11/4 \\
+11/5
+\end{pmatrix}
+$$
+
+$$
+\begin{pmatrix}
+x_{0} \\
+x_{1} \\
+x_{2}
+\end{pmatrix} =  \begin{pmatrix}
+2/19 \\
+0 \\
+11/19
+\end{pmatrix}
+$$ 

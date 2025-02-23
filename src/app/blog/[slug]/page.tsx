@@ -6,6 +6,8 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import rehypeHighlight from "rehype-highlight";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -24,8 +26,8 @@ export default async function BlogPost({ params }: PageProps) {
     source: post.content,
     options: {
       mdxOptions: {
-        remarkPlugins: [remarkGfm],
-        rehypePlugins: [rehypeHighlight, rehypeSlug],
+        remarkPlugins: [remarkGfm, remarkMath],
+        rehypePlugins: [rehypeHighlight, rehypeSlug, rehypeKatex],
       },
     },
   });
