@@ -1,45 +1,71 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import 'server-only';
+import { readFile, readdir } from 'fs/promises';
+import { join } from 'path';
+import matter from 'gray-matter';
 
-const postsDirectory = path.join(process.cwd(), "content/posts");
+// Ensure we're using server-only code
+export const dynamic = 'force-dynamic';
+
+const postsDirectory = join(process.cwd(), 'content/posts');
 
 export type Post = {
+  slug: string;
   title: string;
   description: string;
   date: string;
   readingTime: string;
-  tags: string[];
-  language: "en" | "de";
   category: "tech" | "philosophy" | "other";
-  slug: string;
+  language: "en" | "de";
+  tags: string[];
   content: string;
 };
 
+export function getLanguageName(lang: Post['language']) {
+  const names = {
+    en: 'English',
+    de: 'Deutsch',
+  };
+  return names[lang];
+}
+
+export function getCategoryName(category: Post['category']) {
+  const names = {
+    tech: 'Technology',
+    philosophy: 'Philosophy',
+    other: 'Other',
+  };
+  return names[category];
+}
+
 export async function getPost(slug: string): Promise<Post | null> {
   try {
-    const fullPath = path.join(postsDirectory, `${slug}.mdx`);
-    const fileContents = fs.readFileSync(fullPath, "utf8");
-
+    const fullPath = join(postsDirectory, `${slug}.mdx`);
+    const fileContents = await readFile(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
     return {
-      ...(data as Omit<Post, "content" | "slug">),
       slug,
       content,
+      title: data.title,
+      description: data.description,
+      date: data.date,
+      readingTime: data.readingTime,
+      category: data.category,
+      language: data.language,
+      tags: data.tags || [],
     };
   } catch (error) {
-    console.error(`Error getting post ${slug}:`, error);
+    console.error(`Error reading post ${slug}:`, error);
     return null;
   }
 }
 
 export async function getAllPosts(): Promise<Post[]> {
   try {
-    const slugs = fs
-      .readdirSync(postsDirectory)
-      .filter((file) => file.endsWith(".mdx"))
-      .map((file) => file.replace(/\.mdx$/, ""));
+    const files = await readdir(postsDirectory);
+    const slugs = files
+      .filter((file) => file.endsWith('.mdx'))
+      .map((file) => file.replace(/\.mdx$/, ''));
 
     const posts = await Promise.all(
       slugs.map(async (slug) => {
@@ -52,24 +78,7 @@ export async function getAllPosts(): Promise<Post[]> {
       .filter((post): post is Post => post !== null)
       .sort((a, b) => (new Date(b.date) > new Date(a.date) ? 1 : -1));
   } catch (error) {
-    console.error("Error getting all posts:", error);
+    console.error('Error getting all posts:', error);
     return [];
   }
-}
-
-export function getLanguageName(language: Post["language"]): string {
-  const languages = {
-    en: "English",
-    de: "Deutsch",
-  };
-  return languages[language];
-}
-
-export function getCategoryName(category: Post["category"]): string {
-  const categories = {
-    tech: "Technology",
-    philosophy: "Philosophy",
-    other: "Other",
-  };
-  return categories[category];
 } 
