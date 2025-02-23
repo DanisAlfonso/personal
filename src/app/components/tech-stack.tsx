@@ -10,6 +10,7 @@ import {
   SiPython,
   SiExpo,
   SiFlutter,
+  SiSupabase,
 } from "react-icons/si";
 
 const technologies = [
@@ -72,6 +73,12 @@ const technologies = [
     name: "Flutter", 
     lightColor: "#02569B",
     darkColor: "#02569B" 
+  },
+  { 
+    icon: SiSupabase, 
+    name: "Supabase", 
+    lightColor: "#3ECF8E",
+    darkColor: "#3ECF8E" 
   },
 ];
 
