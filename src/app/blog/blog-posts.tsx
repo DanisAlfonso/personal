@@ -127,16 +127,16 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
           {/* Date sort - Always visible */}
           <button
             onClick={() => toggleSort('date')}
-            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+            className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all hover:scale-[1.01] motion-safe:transform motion-safe:duration-300 ${
               sortConfig?.key === 'date'
                 ? 'bg-primary text-primary-foreground'
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                : 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
             }`}
           >
             <Calendar className="h-4 w-4" />
             Latest
             {sortConfig?.key === 'date' && (
-              <ArrowUpDown className={`h-4 w-4 ${sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+              <ArrowUpDown className={`h-4 w-4 transition-transform duration-200 ${sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
             )}
           </button>
 
@@ -148,10 +148,10 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                 setSelectedTag(tag === selectedTag ? null : tag);
                 setIsTagMenuOpen(false);
               }}
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all hover:scale-[1.01] motion-safe:transform motion-safe:duration-300 ${
                 tag === selectedTag
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
               }`}
             >
               <Tag className="h-4 w-4" />
@@ -163,23 +163,23 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
           <div className="relative" ref={tagMenuRef}>
             <button
               onClick={() => setIsTagMenuOpen(!isTagMenuOpen)}
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all hover:scale-[1.01] motion-safe:transform motion-safe:duration-300 ${
                 (selectedTag && !topTags.find(t => t.tag === selectedTag)) ||
                 selectedCategory ||
                 selectedLanguage ||
                 sortConfig?.key === 'readingTime'
                   ? 'bg-primary text-primary-foreground'
-                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
+                  : 'bg-secondary text-secondary-foreground hover:bg-secondary/90'
               }`}
             >
               <Filter className="h-4 w-4" />
               Filters
-              <ChevronDown className={`ml-1 h-4 w-4 transition-transform ${isTagMenuOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`ml-1 h-4 w-4 transition-transform duration-200 ${isTagMenuOpen ? 'rotate-180' : ''}`} />
             </button>
 
             {/* Filters dropdown menu */}
             {isTagMenuOpen && (
-              <div className="absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md border bg-card shadow-lg ring-1 ring-black ring-opacity-5">
+              <div className="absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md border bg-card shadow-lg ring-1 ring-black ring-opacity-5 transition-all motion-safe:animate-in motion-safe:fade-in-0 motion-safe:zoom-in-95">
                 <div className="p-4 space-y-4">
                   {/* Categories Section */}
                   <div className="mb-4">
@@ -189,7 +189,7 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                         <button
                           key="clear-category"
                           onClick={() => setSelectedCategory(null)}
-                          className="text-sm hover:text-primary"
+                          className="text-sm text-primary hover:text-primary/80 transition-colors"
                         >
                           Clear category
                         </button>
@@ -201,7 +201,7 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                             setSelectedCategory(category);
                             setIsTagMenuOpen(false);
                           }}
-                          className={`flex w-full items-center gap-2 px-2 py-1 text-sm rounded-md ${
+                          className={`flex w-full items-center gap-2 px-2 py-1.5 text-sm rounded-md transition-all hover:scale-[1.005] motion-safe:transform motion-safe:duration-300 ${
                             selectedCategory === category
                               ? "bg-primary/10 text-primary"
                               : "hover:bg-primary/5"
@@ -222,7 +222,7 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                         <button
                           key="clear-language"
                           onClick={() => setSelectedLanguage(null)}
-                          className="text-sm hover:text-primary"
+                          className="text-sm text-primary hover:text-primary/80 transition-colors"
                         >
                           Clear language
                         </button>
@@ -234,7 +234,7 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                             setSelectedLanguage(language);
                             setIsTagMenuOpen(false);
                           }}
-                          className={`flex w-full items-center gap-2 px-2 py-1 text-sm rounded-md ${
+                          className={`flex w-full items-center gap-2 px-2 py-1.5 text-sm rounded-md transition-all hover:scale-[1.005] motion-safe:transform motion-safe:duration-300 ${
                             selectedLanguage === language
                               ? "bg-primary/10 text-primary"
                               : "hover:bg-primary/5"
@@ -255,7 +255,7 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                         {selectedTag && !topTags.find(t => t.tag === selectedTag) && (
                           <button
                             onClick={() => setSelectedTag(null)}
-                            className="text-xs text-muted-foreground hover:text-foreground"
+                            className="text-xs text-primary hover:text-primary/80 transition-colors"
                           >
                             Clear
                           </button>
@@ -266,12 +266,15 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                           <button
                             key={`tag-${tag}`}
                             onClick={() => setSelectedTag(tag === selectedTag ? null : tag)}
-                            className={`flex w-full items-center justify-between px-2 py-1 text-sm rounded-md transition-colors hover:bg-accent ${
-                              tag === selectedTag ? 'text-primary' : 'text-foreground'
+                            className={`flex w-full items-center justify-between px-2 py-1.5 text-sm rounded-md transition-all hover:scale-[1.005] motion-safe:transform motion-safe:duration-300 ${
+                              tag === selectedTag ? 'bg-primary/10 text-primary' : 'hover:bg-primary/5'
                             }`}
                           >
-                            <span>{tag}</span>
-                            <span className="text-xs text-muted-foreground">
+                            <span className="flex items-center gap-2">
+                              <Tag className="h-4 w-4" />
+                              {tag}
+                            </span>
+                            <span className="text-xs text-muted-foreground transition-colors group-hover:text-muted-foreground/80">
                               {count}
                             </span>
                           </button>
@@ -285,14 +288,14 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                     <h3 className="text-sm font-medium text-muted-foreground">Sort By</h3>
                     <button
                       onClick={() => toggleSort('readingTime')}
-                      className={`flex w-full items-center px-2 py-1 text-sm rounded-md transition-colors hover:bg-accent ${
-                        sortConfig?.key === 'readingTime' ? 'text-primary' : 'text-foreground'
+                      className={`flex w-full items-center px-2 py-1.5 text-sm rounded-md transition-all hover:scale-[1.005] motion-safe:transform motion-safe:duration-300 ${
+                        sortConfig?.key === 'readingTime' ? 'bg-primary/10 text-primary' : 'hover:bg-primary/5'
                       }`}
                     >
                       <Clock className="mr-2 h-4 w-4" />
                       Reading Time
                       {sortConfig?.key === 'readingTime' && (
-                        <ArrowUpDown className={`ml-auto h-4 w-4 ${sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
+                        <ArrowUpDown className={`ml-auto h-4 w-4 transition-transform duration-200 ${sortConfig.direction === 'desc' ? 'rotate-180' : ''}`} />
                       )}
                     </button>
                   </div>
@@ -307,7 +310,7 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                         setSortConfig(null);
                         setIsTagMenuOpen(false);
                       }}
-                      className="flex w-full items-center justify-center px-2 py-1 text-sm font-medium text-destructive hover:bg-destructive/10 rounded-md transition-colors"
+                      className="flex w-full items-center justify-center px-2 py-1.5 text-sm font-medium text-destructive hover:bg-destructive/10 rounded-md transition-all hover:scale-[1.005] motion-safe:transform motion-safe:duration-300"
                     >
                       Clear All Filters
                     </button>
@@ -323,12 +326,12 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
         {filteredPosts.map((post) => (
           <article
             key={post.slug}
-            className="group relative overflow-hidden rounded-lg border bg-card transition-all hover:shadow-lg"
+            className="group relative overflow-hidden rounded-lg border bg-card transition-all hover:shadow-sm hover:scale-[1.005] motion-safe:transform motion-safe:duration-300"
           >
             <Link href={`/blog/${post.slug}`} className="block p-6">
               {/* Post metadata */}
               <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 transition-colors group-hover:text-primary/80">
                   <Calendar className="h-4 w-4" />
                   <time dateTime={post.date}>
                     {new Date(post.date).toLocaleDateString("en-US", {
@@ -339,24 +342,26 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
                   </time>
                 </div>
                 <span>•</span>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 transition-colors group-hover:text-primary/80">
                   <Clock className="h-4 w-4" />
                   {post.readingTime}
                 </div>
               </div>
 
               {/* Post title and description */}
-              <h2 className="mt-4 text-xl font-semibold tracking-tight group-hover:text-primary">
+              <h2 className="mt-4 text-xl font-semibold tracking-tight transition-colors group-hover:text-primary">
                 {post.title}
               </h2>
-              <p className="mt-2 line-clamp-3 text-muted-foreground">{post.description}</p>
+              <p className="mt-2 line-clamp-3 text-muted-foreground transition-colors group-hover:text-muted-foreground/80">
+                {post.description}
+              </p>
 
               {/* Post tags */}
               <div className="mt-4 flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
                   <div
                     key={`${post.slug}-${tag}`}
-                    className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground"
+                    className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground transition-colors group-hover:bg-secondary/80"
                   >
                     <Tag className="h-3 w-3" />
                     {tag}
@@ -367,6 +372,28 @@ export function BlogPosts({ initialPosts }: BlogPostsProps) {
           </article>
         ))}
       </div>
+
+      {/* Empty state when no posts match filters */}
+      {filteredPosts.length === 0 && (
+        <div className="flex flex-col items-center justify-center rounded-lg border bg-card p-8 text-center">
+          <p className="text-lg font-medium">No posts found</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Try adjusting your filters or search criteria
+          </p>
+          <button
+            onClick={() => {
+              setSelectedCategory(null);
+              setSelectedLanguage(null);
+              setSelectedTag(null);
+              setSortConfig(null);
+              setIsTagMenuOpen(false);
+            }}
+            className="mt-4 inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors"
+          >
+            Clear All Filters
+          </button>
+        </div>
+      )}
     </>
   );
 } 
