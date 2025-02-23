@@ -75,9 +75,21 @@ export default function Projects() {
             className="mb-12 text-center"
           >
             <h1 className="h1 mb-4">My Projects</h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-muted-foreground mb-6">
               Here are some of my recent projects. For more details on past work, feel free to check out my GitHub profile.
             </p>
+            <motion.a
+              href="https://github.com/DanisAlfonso"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 rounded-md bg-card px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Github className="h-5 w-5" />
+              Visit GitHub Profile
+              <ExternalLink className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </motion.a>
           </motion.div>
 
           <motion.div
@@ -135,25 +147,33 @@ export default function Projects() {
                     ))}
                   </div>
                   <div className="flex gap-4">
-                    <a
+                    <motion.a
                       href={project.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+                      className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
                     >
-                      <Github className="h-4 w-4" />
-                      Source
-                    </a>
+                      <Github className="h-4 w-4 transition-transform group-hover:scale-110" />
+                      <span className="border-b border-dotted border-muted-foreground/50 group-hover:border-foreground">
+                        Source
+                      </span>
+                    </motion.a>
                     {project.links.live !== "#" && (
-                      <a
+                      <motion.a
                         href={project.links.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+                        className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                       >
-                        <ExternalLink className="h-4 w-4" />
-                        Live Demo
-                      </a>
+                        <ExternalLink className="h-4 w-4 transition-transform group-hover:scale-110" />
+                        <span className="border-b border-dotted border-muted-foreground/50 group-hover:border-foreground">
+                          Live Demo
+                        </span>
+                      </motion.a>
                     )}
                   </div>
                 </div>
