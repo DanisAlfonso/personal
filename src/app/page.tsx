@@ -2,6 +2,7 @@
 
 import { Header } from "./components/header";
 import { ImagePreviewModal } from "./components/image-preview-modal";
+import { TechStack } from "./components/tech-stack";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -47,6 +48,7 @@ export default function Home() {
                 Building beautiful, responsive, and user-friendly applications
               </p>
             </div>
+            <TechStack />
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
