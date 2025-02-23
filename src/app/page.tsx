@@ -3,6 +3,7 @@
 import { Header } from "./components/header";
 import { ImagePreviewModal } from "./components/image-preview-modal";
 import { TechStack } from "./components/tech-stack";
+import { SocialLinks } from "./components/social-links";
 import { motion } from "framer-motion";
 import { useState } from "react";
 
@@ -48,6 +49,7 @@ export default function Home() {
                 Building beautiful, responsive, and user-friendly applications
               </p>
             </div>
+            <SocialLinks />
             <TechStack />
           </motion.div>
           <motion.div
