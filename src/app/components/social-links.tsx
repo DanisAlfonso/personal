@@ -62,7 +62,7 @@ export function SocialLinks() {
       variants={container}
       initial="hidden"
       animate="show"
-      className="flex items-center justify-center gap-8 mt-8"
+      className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 mt-4 sm:mt-6 md:mt-8"
     >
       {socialLinks.map((social) => (
         <motion.a
@@ -70,7 +70,7 @@ export function SocialLinks() {
           href={social.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative p-3"
+          className="group relative p-2 sm:p-3"
           variants={item}
           whileHover={{ y: -4, scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
@@ -89,7 +89,7 @@ export function SocialLinks() {
             transition={{ duration: 0.5 }}
           >
             <social.icon 
-              className="w-6 h-6 transition-all duration-300 text-muted-foreground group-hover:text-foreground dark:text-muted-foreground dark:group-hover:text-foreground" 
+              className="w-5 h-5 sm:w-6 sm:h-6 transition-all duration-300 text-muted-foreground group-hover:text-foreground dark:text-muted-foreground dark:group-hover:text-foreground" 
               style={{
                 filter: "drop-shadow(0 0 8px transparent)",
               }}
@@ -103,7 +103,7 @@ export function SocialLinks() {
               whileHover={{ opacity: 1 }}
             >
               <social.icon 
-                className="w-6 h-6" 
+                className="w-5 h-5 sm:w-6 sm:h-6" 
                 style={{ 
                   color: `var(--social-color-${social.name.toLowerCase()})` 
                 }} 
@@ -114,7 +114,7 @@ export function SocialLinks() {
           
           {/* Tooltip */}
           <motion.span
-            className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 pointer-events-none"
+            className="absolute -bottom-6 sm:-bottom-8 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs text-muted-foreground opacity-0 group-hover:opacity-100 pointer-events-none"
             initial={{ y: -4, opacity: 0 }}
             whileHover={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.2 }}

@@ -30,7 +30,7 @@ export function ProfileImage({ src, alt, onOpenPreview }: ProfileImageProps) {
           <motion.img
             src={src}
             alt={alt}
-            className="h-52 w-52 rounded-full object-cover md:h-64 md:w-64"
+            className="h-40 w-40 rounded-full object-cover sm:h-48 sm:w-48 md:h-52 md:w-52 lg:h-64 lg:w-64"
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           />
@@ -39,8 +39,8 @@ export function ProfileImage({ src, alt, onOpenPreview }: ProfileImageProps) {
       
       {/* Decorative elements */}
       <div className="absolute -z-10 animate-pulse">
-        <div className="absolute -left-8 -top-8 h-16 w-16 rounded-full bg-primary/10 blur-xl" />
-        <div className="absolute -right-8 -bottom-8 h-16 w-16 rounded-full bg-primary/10 blur-xl" />
+        <div className="absolute -left-4 -top-4 h-8 w-8 rounded-full bg-primary/10 blur-xl sm:-left-6 sm:-top-6 sm:h-12 sm:w-12 md:-left-8 md:-top-8 md:h-16 md:w-16" />
+        <div className="absolute -right-4 -bottom-4 h-8 w-8 rounded-full bg-primary/10 blur-xl sm:-right-6 sm:-bottom-6 sm:h-12 sm:w-12 md:-right-8 md:-bottom-8 md:h-16 md:w-16" />
       </div>
     </motion.div>
   );
