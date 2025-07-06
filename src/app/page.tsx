@@ -31,13 +31,18 @@ export default function Home() {
               alt="Danis Ramírez"
               onOpenPreview={() => setIsImagePreviewOpen(true)}
             />
-            <div className="space-y-2">
+            <div className="space-y-4">
               <h1 className="h1 bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-3xl md:text-4xl lg:text-5xl text-transparent">
                 Danis Ramírez
               </h1>
               <h2 className="text-xl md:text-2xl font-semibold text-muted-foreground">
                 Software Developer
               </h2>
+              <p className="max-w-2xl text-base md:text-lg text-muted-foreground/90 leading-relaxed">
+                Born in rural Honduras, former physics professor turned software developer. 
+                Fascinated by the intersection of human language and machine understanding, 
+                I craft digital solutions while exploring the evolving landscape of AI-assisted development.
+              </p>
               <AnimatedText />
             </div>
             <SocialLinks />

@@ -75,14 +75,31 @@ export default function About() {
 
             {/* Main Content */}
             <motion.div variants={fadeInUp} className="space-y-8">
-              <section className="space-y-4">
+              <section className="space-y-6">
                 <h2 className="h2">About Me</h2>
-                <p className="text-muted-foreground">
-                  I was born in Honduras in 1989. From 2014 to 2019, I taught physics at various institutions in my home country, 
-                  primarily at the Universidad Nacional Autónoma de Honduras (UNAH). My journey into programming began with C++ 
-                  during my physics studies, followed by Python for teaching and personal projects. Currently based in Spain, 
-                  I&apos;m focused on building modern web applications and exploring various programming languages and technologies.
-                </p>
+                <div className="prose prose-gray dark:prose-invert max-w-none">
+                  <div className="space-y-6 text-base leading-7 text-foreground/90">
+                    <p>
+                      I was born in 1989, in a rather remote place—a rural area in Honduras, Central America, with likely fewer than a hundred inhabitants. Between the ages of fifteen and seventeen, I received technical training as an electrician. In another life, or perhaps in some parallel universe, I might have devoted my days to the study of music. But by then, pursuing music formally at a university level was far beyond my reach—outside the realm of my skills, my realistic options, or even my imagination.
+                    </p>
+                    
+                    <p>
+                      Among the paths that did feel possible—and that held my interest—were mathematics, physics, philosophy, history, and the fields of electrical or computer engineering. I chose physics. For about five years, I worked as a physics instructor, teaching introductory courses to engineering students, before eventually leaving that job behind.
+                    </p>
+                    
+                    <p>
+                      There was always something deeply fascinating to me about expressing ideas in a way that a machine could understand and follow. Admittedly, I struggled with it—but that was more than a decade ago, and much has changed since then. I used to write programs line by line, solving linear equations or implementing numerical methods for differential equations in C++. It was a slow, painstaking process—frustratingly tedious and, at times, far beyond my comfort zone.
+                    </p>
+                    
+                    <p>
+                      Today, things are different. The emergence of technologies like large language models has transformed that landscape. What once seemed like a distant dream—the ability to articulate complex ideas in natural human language and have machines understand—has become a reality. And it&apos;s a remarkable one. Being able to communicate in plain language, without having to master Python, TypeScript, C++, or any other programming language, feels like a genuine breakthrough. Of course, as with any major shift, some embrace it, while others resist.
+                    </p>
+                    
+                    <p>
+                      Circumstances—those ever-unpredictable forces—have not allowed me to dedicate myself fully to creative pursuits like music, physics, or programming. Life&apos;s demands have taken me down other roads. But whenever time allows, I return to them. They remain, even now, my quiet sources of joy.
+                    </p>
+                  </div>
+                </div>
               </section>
 
               <section className="space-y-4">
